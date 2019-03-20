@@ -15,7 +15,7 @@ RUN sha256sum -cs packer_${PACKER_VERSION}_SHA256SUMS
 RUN unzip packer_${PACKER_VERSION}_linux_amd64.zip -d /bin
 RUN rm -f packer_${PACKER_VERSION}_linux_amd64.zip
 
-ENV TERRAFORM_VERSION=0.11.7
+ENV TERRAFORM_VERSION=0.11.13
 
 # https://github.com/hashicorp/terraform/blob/master/scripts/docker-release/Dockerfile-release
 COPY releases_public_key .
