@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN apk add --update git bash wget openssl groff less python py-pip jq perl openssh
+RUN apk add --no-cache git bash wget openssl groff less python py-pip jq perl openssh
 RUN pip install --quiet awscli
 
 # https://github.com/hashicorp/docker-hub-images/blob/master/packer/Dockerfile-light
@@ -30,7 +30,7 @@ RUN echo Building image for Terraform ${TERRAFORM_VERSION} && \
     wget -q https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
     wget -q https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS.sig && \
     wget -q https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS && \
-    apk add --update gnupg && \
+    apk add --no-cache gnupg && \
     gpg --import releases_public_key && \
     gpg --verify terraform_${TERRAFORM_VERSION}_SHA256SUMS.sig terraform_${TERRAFORM_VERSION}_SHA256SUMS && \
     apk del gnupg && \
