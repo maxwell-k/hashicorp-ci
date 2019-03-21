@@ -27,12 +27,13 @@ COPY releases_public_key .
 # - Extract the zip file so it can be run
 
 RUN echo Building image for Terraform ${TERRAFORM_VERSION} && \
-    apk add --update git openssh gnupg && \
     wget -q https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
     wget -q https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS.sig && \
     wget -q https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS && \
+    apk add --update gnupg && \
     gpg --import releases_public_key && \
     gpg --verify terraform_${TERRAFORM_VERSION}_SHA256SUMS.sig terraform_${TERRAFORM_VERSION}_SHA256SUMS && \
+    apk del gnupg && \
     grep linux_amd64 terraform_${TERRAFORM_VERSION}_SHA256SUMS >terraform_${TERRAFORM_VERSION}_SHA256SUMS_linux_amd64 && \
     sha256sum -cs terraform_${TERRAFORM_VERSION}_SHA256SUMS_linux_amd64 && \
     unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /bin && \
