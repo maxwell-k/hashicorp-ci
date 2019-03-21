@@ -1,7 +1,7 @@
 FROM alpine:latest
 
-RUN apk add --no-cache git bash wget openssl groff less python py-pip jq perl openssh
-RUN pip install --quiet awscli
+RUN apk add --no-cache git bash wget openssl groff less python3 py-pip jq perl openssh
+RUN pip3 install --quiet awscli
 
 # https://github.com/hashicorp/docker-hub-images/blob/master/packer/Dockerfile-light
 ENV PACKER_VERSION=1.3.4
